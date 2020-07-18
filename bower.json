@@ -1,0 +1,33 @@
+{
+  "name": "cpf-menu",
+  "version": "1.0.0",
+  "description": "cpf-menu",
+  "main": "index.js",
+  "authors": [
+    "TymonLin <Tymonlin@163.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "menu",
+    "sidebar",
+    "tree"
+  ],
+  "homepage": "https://github.com/tymonlin/cpf-menu",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "angular": "^1.8.0",
+    "angular-ui-router": "^1.0.13",
+    "angular-cookies": "^1.8.8",
+    "bootstrap": "3.3.7"
+  },
+  "devDependencies": {
+    "angular-resource": "^1.8.0"
+  }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cloud Pay Full Menu Demo</title>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/angular.js/1.6.8/angular.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="cpf-menu.css?v=3" rel="stylesheet" type="text/css"/>
+    <script src="cpf-menu.js?v=3"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="CPFMenuDemoCtrl" class="menu">
+    <div class="head">
+        <cpf-area-menu class="big-menu pull-left" menu-area-array="menuAreaArray" get-user-info="getUserInfo(listener)"></cpf-area-menu>
+    </div>
+    <cpf-menu menu-array="menuArray" class="collapse navbar-collapse menu menu-sidebar" role="navigation"></cpf-menu>
+</div>
+<script>
+    var app = angular.module('myApp', ["ngResource", "module.cloudpayfull.menu", "ngCookies", "ui.router"]);
+    app.config(["$CPFMenuProvider", function ($CPFMenuProvider) {
+        $CPFMenuProvider.setConfig({menuAreaArrayFlag: true});
+    }]);
+    app.controller('CPFMenuDemoCtrl', function($scope, $rootScope, $cookies, TestUserDataResource, $CPFMenu) {
+        TestUserDataResource.login({}, function (userInfo) {
+            var menuList = $CPFMenu.getMenuList(userInfo, "CRM");
+            $rootScope.menuAreaArray = $CPFMenu.initMenuList(menuList, 0);
+            $rootScope.menuArray = $rootScope.menuAreaArray[0].menuList;
+        }, function (error) {
+            alert(error.message);
+        });
+    });
+
+    app.factory('TestUserDataResource', ['$resource',
+        function ($resource) {
+            return $resource("", {}, {
+                /**
+                 * 登陆
+                 */
+                login: {
+                    url: "./test-user-info.json",
+                    method: "POST"
+                },
+
+                getUserInfo: {
+                    url: "./test-user-info.json",
+                    method: "GET"
+                }
+            });
+        }
+    ]);
+</script>
+</body>
+</html>

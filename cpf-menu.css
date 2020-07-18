@@ -1,0 +1,201 @@
+.big-menu{list-style: none; font-size:14px; font-weight: bold;}
+
+.big-menu > li:before {
+    left: 0;
+    top: 0;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: scale3d(0, 0, 0);
+    -moz-transform: scale3d(0, 0, 0);
+    -ms-transform: scale3d(0, 0, 0);
+    -o-transform: scale3d(0, 0, 0);
+    transform: scale3d(0, 0, 0);
+    -webkit-transition: all;
+    -o-transition: all;
+    transition: all;
+    -webkit-transition-duration: 250ms;
+    transition-duration: 250ms;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.12);
+    z-index: 0;
+    border-radius: 2px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.menu > ul.nav li > a:before {
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    top: 18px;
+    left: 44px;
+    width: 6px;
+    height: 6px;
+}
+.menu > ul.nav > li > ul > li > a.active:before,
+.menu > ul.nav > li > ul > li:hover > a:before {
+    background: #30549c;
+}
+.big-menu > li:not(#toggle-width):hover:before,
+.big-menu > li:not(#toggle-width).open:before,
+.big-menu > li:not(#toggle-width).selected2:before{
+    -webkit-transform: scale3d(1.4, 1.5, 1);
+    -moz-transform: scale3d(1.4, 1.5, 1);
+    -ms-transform: scale3d(1.4, 1.5, 1);
+    -o-transform: scale3d(1.4, 1.5, 1);
+    transform: scale3d(1.4, 1.5, 1);
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.big-menu li{
+    float: left;
+    position: relative;
+    margin-left: 25px;
+}
+
+.big-menu > li > a {
+    /*color: #fff;*/
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+
+
+@media (min-width: 768px) {
+    .menu-sidebar.menu {
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        z-index: 1;
+        position: absolute;
+        top: 0px;
+        width: 250px;
+        margin-top: 51px;
+        box-shadow: 2px 0 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        height: calc(100vh - 51px)!important;
+        background-color: white;
+    }
+
+}
+.menu .sub-menu ul {
+    list-style: none;
+    display: none;
+    padding: 0;
+}
+.menu .sub-menu.toggled ul{
+    display: block;
+}
+.menu > ul.nav > li > ul {
+    margin-bottom:15px;
+}
+.menu > ul.nav > li.toggled > a,
+.menu > ul.nav > li.dropdown > a:hover{
+    border-left: 5px solid #4099ff;
+    padding-left: 10px;
+}
+.menu > ul.nav li a:hover,
+.menu > ul.nav li a:focus {
+    cursor: pointer;
+}
+.menu > ul.nav li > ul > li:after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 26px;
+    width: 20px;
+    height: 1px;
+    background: rgba(200, 200, 200, 0.4);
+}
+.menu > ul.nav > li:after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 25px;
+    width: 1px;
+    height: calc(100% - 74px);
+    background: rgba(200, 200, 200, 0.4);
+}
+.menu > ul.nav > li > ul  {position: relative}
+
+/*-start-菜单前点小*/
+.style-purple .menu > ul.nav li > a:before {
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    top: 18px;
+    left: 44px;
+    width: 6px;
+    height: 6px;
+}
+.style-purple .menu > ul.nav > li > ul > li > a.active:before,
+.style-purple .menu > ul.nav > li > ul > li:hover > a:before {
+    background: #4099ff;
+}
+/*-end-菜单前小点*/
+.menu.navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+}
+.menu ul li {
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.menu ul li a.active {
+    /*background-color: #eee;*/
+}
+/*.menu .arrow {*/
+    /*float: right;*/
+/*}*/
+/*.menu .fa.arrow:before {*/
+    /*content: "\f104";*/
+/*}*/
+/*.menu .active>a>.fa.arrow:before {*/
+    /*content: "\f107";*/
+/*}*/
+.menu .nav-second-level li,
+.menu .nav-third-level li {
+    border-bottom: 0!important;
+}
+.menu .nav-second-level li a {
+    padding-left: 55px;
+}
+.menu .nav-third-level li a {
+    padding-left: 52px;
+}
+.menu a{
+    color: #666666;
+}
+.menu a i {
+    margin-right: 5px;
+}
+
+.sub-menu > a:before,
+.sub-menu > a:after {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    float: right !important;
+}
+.sub-menu > a:after {
+    content: "\f105";
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+.sub-menu .sub-menu > a:before,
+.sub-menu .sub-menu > a:after {
+    top: 5px;
+}
+
+.sub-menu.toggled .sub-menu:after {
+    content: "\f106";
+}
