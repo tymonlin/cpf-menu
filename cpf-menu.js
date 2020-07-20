@@ -15,15 +15,15 @@
                 "           data-ng-class=\"{'active': (menu | CPFMenuActive), 'sub-menu': (menu.menuList != null && menu.menuList.length > 0), 'toggled': (menu | CPFMenuActive)}\">" +
                 "           <a data-ng-if=\"menu.menuList == null || menu.menuList.length == 0\"" +
                 "               ng-class=\"{'active ': (menu | CPFMenuActive), 'sub-menu': (menu.menuList != null && menu.menuList.length > 0) }\"" +
-                "               data-ui-sref=\"{{menu.href}}\"><i class=\"fa {{menu.icon}}\"></i> {{translateKey ? (('menu.m_' + menu[translateKey]) | CPFMenuTitle) : menu.menuTitle}} " +
+                "               data-ui-sref=\"{{menu.href}}\"><i class=\"fa {{menu.icon}}\"></i> <label class='menu-title'>{{translateKey ? (('menu.m_' + menu[translateKey]) | CPFMenuTitle) : menu.menuTitle}}</label> " +
                 "           </a>" +
                 "           <a data-ng-if=\"menu.menuList != null && menu.menuList.length > 0\" "+
                 "               ng-class=\"{'active':(menu | CPFMenuActive), 'sub-menu':(menu.menuList != null && menu.menuList.length > 0)}\" toggle-submenu>" +
-                "               <i class=\"fa {{menu.icon}}\"></i> {{translateKey ? (('menu.m_' + menu[translateKey]) | CPFMenuTitle) : menu.menuTitle}}" +
+                "               <i class=\"fa {{menu.icon}}\"></i> <label class='menu-title'>{{translateKey ? (('menu.m_' + menu[translateKey]) | CPFMenuTitle) : menu.menuTitle}}</label>" +
                 "           </a>"+
                 "           <ul data-ng-if=\"menu.menuList != null && menu.menuList.length > 0\" class=\"nav nav-second-level\">" +
                 "               <li data-ng-repeat=\"sonMenu in menu.menuList\"> " +
-                "                   <a data-ui-sref=\"{{sonMenu.href}}\" data-ng-click=\"sidebarStat($event)\" ng-class=\"{'active': (sonMenu | CPFMenuActive)}\">{{ translateKey ? (('menu.m_' + sonMenu[translateKey]) | CPFMenuTitle) : sonMenu.menuTitle}}</a>" +
+                "                   <a data-ui-sref=\"{{sonMenu.href}}\" data-ng-click=\"sidebarStat($event)\" ng-class=\"{'active': (sonMenu | CPFMenuActive)}\"> <label class='menu-title'>{{ translateKey ? (('menu.m_' + sonMenu[translateKey]) | CPFMenuTitle) : sonMenu.menuTitle}}</label> </a>" +
                 "               </li>"+
                 "           </ul>"+
                 "       </li>" +
@@ -97,6 +97,7 @@
             restrict: 'A',
             link: function(scope, element) {
                 element.click(function(){
+                    if ($(".mini-menu").size() > 0) return;
                     var flag = element.parent().hasClass("toggled");
                     element.parent().parent().children().each(function (i) {
                         $(this).removeClass("toggled");

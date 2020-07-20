@@ -26,19 +26,7 @@
     opacity: 0;
     filter: alpha(opacity=0);
 }
-.menu > ul.nav li > a:before {
-    content: "";
-    border-radius: 50%;
-    position: absolute;
-    top: 18px;
-    left: 44px;
-    width: 6px;
-    height: 6px;
-}
-.menu > ul.nav > li > ul > li > a.active:before,
-.menu > ul.nav > li > ul > li:hover > a:before {
-    background: #30549c;
-}
+
 .big-menu > li:not(#toggle-width):hover:before,
 .big-menu > li:not(#toggle-width).open:before,
 .big-menu > li:not(#toggle-width).selected2:before{
@@ -70,6 +58,7 @@
 
 @media (min-width: 768px) {
     .menu-sidebar.menu {
+        transition: width linear 0.1s;
         font-family: "Poppins", sans-serif;
         font-size: 14px;
         z-index: 1;
@@ -82,6 +71,21 @@
         background-color: white;
     }
 
+}
+.menu-sidebar.menu label.menu-title{transition: display linear 2s; display: inline-block;}
+
+.menu > ul.nav li > a:before {
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    top: 18px;
+    left: 44px;
+    width: 6px;
+    height: 6px;
+}
+.menu > ul.nav > li > ul > li > a.active:before,
+.menu > ul.nav > li > ul > li:hover > a:before {
+    background: #30549c;
 }
 .menu .sub-menu ul {
     list-style: none;
@@ -96,7 +100,7 @@
 }
 .menu > ul.nav > li.toggled > a,
 .menu > ul.nav > li.dropdown > a:hover{
-    border-left: 5px solid #4099ff;
+    border-left: 4px solid #4099ff;
     padding-left: 10px;
 }
 .menu > ul.nav li a:hover,
@@ -123,21 +127,7 @@
 }
 .menu > ul.nav > li > ul  {position: relative}
 
-/*-start-菜单前点小*/
-.style-purple .menu > ul.nav li > a:before {
-    content: "";
-    border-radius: 50%;
-    position: absolute;
-    top: 18px;
-    left: 44px;
-    width: 6px;
-    height: 6px;
-}
-.style-purple .menu > ul.nav > li > ul > li > a.active:before,
-.style-purple .menu > ul.nav > li > ul > li:hover > a:before {
-    background: #4099ff;
-}
-/*-end-菜单前小点*/
+
 .menu.navbar-collapse {
     padding-right: 0;
     padding-left: 0;
@@ -198,4 +188,20 @@
 
 .sub-menu.toggled .sub-menu:after {
     content: "\f106";
+}
+
+
+
+.mini-menu .menu.menu-sidebar label.menu-title{display: none;}
+.mini-menu .menu.menu-sidebar{width: 50px;}
+.mini-menu .menu.menu-sidebar i{font-size: 16px; color: #a7b1c2}
+.mini-menu .menu.menu-sidebar ul li:hover i{color: #FFFAF7F7}
+.mini-menu .menu.menu-sidebar{}
+.mini-menu .nav-second-level  {display: none}
+.mini-menu .sub-menu > a:before,
+.mini-menu .sub-menu > a:after {
+    display: none;
+}
+.mini-menu .sub-menu > a:after {
+    display: none;
 }

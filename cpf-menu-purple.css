@@ -1,0 +1,15 @@
+/*-start-菜单前点小*/
+.style-purple .menu > ul.nav li > a:before {
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    top: 18px;
+    left: 44px;
+    width: 6px;
+    height: 6px;
+}
+.style-purple .menu > ul.nav > li > ul > li > a.active:before,
+.style-purple .menu > ul.nav > li > ul > li:hover > a:before {
+    background: #4099ff;
+}
+/*-end-菜单前小点*/

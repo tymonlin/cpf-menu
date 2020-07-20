@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
     <title>Cloud Pay Full Menu Demo</title>
@@ -7,6 +7,7 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/angular.js/1.6.8/angular.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
@@ -14,18 +15,56 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="cpf-menu.css?v=3" rel="stylesheet" type="text/css"/>
-    <script src="cpf-menu.js?v=3"></script>
+    <link href="cpf-menu.css?v=10" rel="stylesheet" type="text/css"/>
+    <link href="cpf-menu-dark.css?v=9" rel="stylesheet" type="text/css"/>
+    <script src="cpf-menu.js?v=4"></script>
+    <style>
+
+
+
+        .style-dark .menu.menu-sidebar {
+            background-color: #2f4050;
+        }
+        .style-dark .menu.menu-sidebar ul li a {
+            color: #a7b1c2;
+        }
+        .style-dark .menu.menu-sidebar ul li:hover a{
+            transition: all linear 0.1s;
+            color: white;
+        }
+        .style-dark .menu.menu-sidebar ul.nav li{border-bottom: 0px;}
+        .style-dark .menu.menu-sidebar ul.nav li:hover > a {background: #293846}
+
+        .style-dark .menu > ul.nav li > a:before {
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            top: 18px;
+            left: 44px;
+            width: 6px;
+            height: 6px;
+        }
+        .style-dark .menu > ul.nav > li > ul > li > a.active:before,
+        .style-dark .menu > ul.nav > li > ul > li:hover > a:before {
+            background: #FFFAF7F7;
+        }
+        .menu > ul.nav > li.toggled > a,
+        .style-dark .menu > ul.nav > li.dropdown > a:hover{
+            border-left: 4px solid #19aa8d;
+        }
+    </style>
 </head>
 <body>
-<div ng-app="myApp" ng-controller="CPFMenuDemoCtrl" class="menu">
+<div ng-controller="CPFMenuDemoCtrl" class="style-dark" ng-class="{'mini-menu': miniMenu}">
+    {{miniMenu}}
+    <button ng-click="switchSiderbar()">菜单</button>
     <div class="head">
         <cpf-area-menu class="big-menu pull-left" menu-area-array="menuAreaArray" get-user-info="getUserInfo(listener)"></cpf-area-menu>
     </div>
     <cpf-menu menu-array="menuArray" class="collapse navbar-collapse menu menu-sidebar" role="navigation"></cpf-menu>
 </div>
 <script>
-    var app = angular.module('myApp', ["ngResource", "module.cloudpayfull.menu", "ngCookies", "ui.router"]);
+    var app = angular.module('myApp', ["ngResource", "module.cloudpayfull.menu", "ngCookies", "ui.router", "ngAnimate"]);
     app.config(["$CPFMenuProvider", function ($CPFMenuProvider) {
         $CPFMenuProvider.setConfig({menuAreaArrayFlag: true});
     }]);
@@ -37,6 +76,11 @@
         }, function (error) {
             alert(error.message);
         });
+
+        $scope.switchSiderbar = function () {
+            $scope.miniMenu = !$scope.miniMenu;
+            console.log($scope.miniMenu);
+        }
     });
 
     app.factory('TestUserDataResource', ['$resource',
