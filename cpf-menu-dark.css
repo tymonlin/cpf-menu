@@ -1,1 +1,116 @@
+/*.style-dark .menu.menu-sidebar {*/
+/*    background-color: #2f4050;*/
+/*}*/
+/*.style-dark .menu.menu-sidebar ul li a {*/
+/*    color: #a7b1c2;*/
+/*}*/
+/*.style-dark .menu.menu-sidebar ul li:hover > a{*/
+/*    transition: all linear 0.1s;*/
+/*    color: white;*/
+/*}*/
+/*.style-dark .menu.menu-sidebar ul.nav li{border-bottom: 0px;}*/
+
+
+/*.style-dark .menu.menu-sidebar > ul.nav li > a:before {*/
+/*    content: "";*/
+/*    border-radius: 50%;*/
+/*    position: absolute;*/
+/*    top: 18px;*/
+/*    left: 44px;*/
+/*    width: 6px;*/
+/*    height: 6px;*/
+/*    color: white;*/
+/*}*/
+
+/*.style-dark .menu.menu-sidebar ul.dropdown-menu {*/
+/*    background-color: #2f4050;*/
+/*    width: 10em;*/
+/*}*/
+
+/*!*菜单经过时的变色效果*!*/
+/*.style-dark .menu.menu-sidebar > ul.nav > li > ul > li.active > a:before,*/
+/*.style-dark .menu.menu-sidebar > ul.nav > li > ul > li:hover > a:before {*/
+/*    background: #FFFAF7F7;*/
+/*}*/
+
+/*!*二级目录的处理*!*/
+/*.style-dark .menu.menu-sidebar > ul.nav > ul.nav > li:hover > a {*/
+/*    border-left: 4px solid #19aa8d;*/
+/*    background: #293846;*/
+/*}*/
+
+/*.style-dark.mini-menu .menu.menu-sidebar > ul > li.active ul > li > a.active {*/
+/*    background-color: #293846;*/
+/*}*/
+
+/*!*一级目录选中的处理*!*/
+/*.style-dark .menu.menu-sidebar ul.dropdown-menu li.active > a,*/
+/*.style-dark .menu.menu-sidebar ul.dropdown-menu li.open > a,*/
+/*.style-dark .menu.menu-sidebar ul.dropdown-menu li:hover > a,*/
+/*.style-dark .menu.menu-sidebar > ul.nav > li.active > a,*/
+/*.style-dark .menu.menu-sidebar > ul.nav > li.toggled > a,*/
+/*.style-dark .menu.menu-sidebar > ul.nav > li.dropdown > a:hover{*/
+/*    border-left: 4px solid #19aa8d;*/
+/*    background: #293846;*/
+/*}*/
+
+/*!*.style-dark .menu.menu-sidebar*!*/
+
+/*  整体背景色 */
+.style-dark .menu.menu-sidebar > ul > li ul,
+.style-dark .menu.menu-sidebar {
+    background-color: #2f4050;
+}
+/** 字体颜色 **/
+.style-dark .menu.menu-sidebar ul li a,
+.style-dark .menu.menu-sidebar ul li a i {color: #a7b1c2;}
+
+.style-dark .menu.menu-sidebar ul li.active > a,
+.style-dark .menu.menu-sidebar ul li.active > ul > li a.active,
+.style-dark .menu.menu-sidebar ul li:hover > a{
+
+    color: white;
+    background-color: #2f4050;
+}
+
+/* - start - 二级菜单前面的小点*/
+.style-dark .menu.menu-sidebar > ul.nav-default > li > ul > li > a.active:before,
+.style-dark .menu.menu-sidebar > ul.nav-default > li > ul > li:hover > a:before {
+    background: #19aa8d;
+}
+/* - end - 二级菜单前面的小点*/
+
+
+.style-dark .menu.menu-sidebar > ul.mini-bar > li a i{
+    font-size: 16px; color: #a7b1c2;
+}
+/*一级菜单经过时左侧border的颜色*/
+.style-dark .menu.menu-sidebar > ul.nav > li.toggled > a,
+.style-dark .menu.menu-sidebar > ul.nav > li.active > a,
+.style-dark .menu-sidebar.menu > ul.nav > li.dropdown > a:hover{
+    border-left-color: #19aa8d;
+    background-color: #293846;
+}
+
+
+/**  -start- 小菜单 修订**/
+.style-dark .menu.menu-sidebar > ul > li,
+.style-dark .menu.menu-sidebar > ul > li > ul > li {
+    border: 0px;
+}
+.style-dark .menu.menu-sidebar > ul > li.active ul > li > a,
+.style-dark .menu.menu-sidebar > ul > li.active ul > li > a.active {
+    background-color: #2f4050;
+}
+/**  -end- 小菜单 修订**/
+
+
+/*二级目录的处理*/
+.style-dark .menu.menu-sidebar > ul > li:hover a,
+.style-dark .menu.menu-sidebar > ul > li.active a,
+.style-dark .menu.menu-sidebar ul.dropdown-menu li:hover > a,
+.style-dark .menu.menu-sidebar ul.dropdown-menu li > a.active {
+    border-left: 4px solid #19aa8d;
+    background-color: #293846;
+}
 

@@ -64,17 +64,23 @@
         z-index: 1;
         position: absolute;
         top: 0px;
-        width: 250px;
+        width: 180px;
         margin-top: 51px;
         box-shadow: 2px 0 2.94px 0.06px rgba(4, 26, 55, 0.16);
         height: calc(100vh - 51px)!important;
         background-color: white;
     }
-
 }
-.menu-sidebar.menu label.menu-title{transition: display linear 2s; display: inline-block;}
+.menu-sidebar.menu label.menu-title{
+    transition: display linear 2s;
+    display: inline-block;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
 
-.menu-sidebar.menu > ul.nav li > a:before {
+
+/* - start - 二级菜单前面的小点*/
+.menu-sidebar.menu > ul.nav-default li > a:before {
     content: "";
     border-radius: 50%;
     position: absolute;
@@ -83,38 +89,33 @@
     width: 6px;
     height: 6px;
 }
-/*二级菜单前面的小点*/
 .menu-sidebar.menu > ul.nav-default > li > ul > li > a.active:before,
 .menu-sidebar.menu > ul.nav-default > li > ul > li:hover > a:before {
     background: #4099ff;
 }
+/* - end - 二级菜单前面的小点*/
 
-/*.menu-sidebar.menu .sub-menu ul {*/
-    /*list-style: none;*/
-    /*display: none;*/
-    /*padding: 0;*/
-/*}*/
-.menu-sidebar.menu > ul.nav > .toggled ul{
+/* 所有二级菜单先隐藏*/
+.menu-sidebar.menu > ul.nav-default li ul {
+    display: none;
+}
+/*选中的二级菜单显示*/
+.menu-sidebar.menu > ul.nav-default > li.toggled ul{
     display: block;
 }
-.menu-sidebar.menu > ul.nav > li > ul {
-    margin-bottom:15px;
+.menu-sidebar.menu > ul.nav-default > li > ul {
+    margin-bottom:10px;
 }
-/*一级菜单经过时左侧border的颜色*/
 
-.menu.menu-sidebar > ul.nav-default > li.toggled > a,
+/*一级菜单经过时左侧border的颜色*/
+.menu.menu-sidebar > ul.nav > li.toggled > a,
 .menu.menu-sidebar > ul.nav > li.active > a,
 .menu-sidebar.menu > ul.nav > li.dropdown > a:hover{
     border-left: 4px solid #4099ff;
     padding-left: 11px;
+    background-color: #eeeeee;
 }
-/*二级目录的处理*/
-.menu.menu-sidebar ul.dropdown-menu li.active > a,
-.menu.menu-sidebar ul.dropdown-menu li.open > a,
-.menu.menu-sidebar ul.dropdown-menu li:hover > a{
-    border-left: 4px solid #4099ff;
-    padding-left: 16px;
-}
+
 
 
 .menu-sidebar.menu > ul.nav li a:hover,
@@ -133,7 +134,7 @@
 .menu-sidebar.menu > ul.nav > li:after {
     content: "";
     position: absolute;
-    top: 40px;
+    top: 50px;
     left: 25px;
     width: 1px;
     height: calc(100% - 74px);
@@ -150,33 +151,18 @@
     border-bottom: 1px solid #e7e7e7;
 }
 
-.menu-sidebar.menu ul li a.active {
-    /*background-color: #eee;*/
-}
-/*.menu-sidebar.menu .arrow {*/
-    /*float: right;*/
-/*}*/
-/*.menu-sidebar.menu .fa.arrow:before {*/
-    /*content: "\f104";*/
-/*}*/
-/*.menu-sidebar.menu .active>a>.fa.arrow:before {*/
-    /*content: "\f107";*/
-/*}*/
 .menu.menu-sidebar .nav.nav-default li,
 .menu.menu-sidebar .nav-third-level li {
     border-bottom: 0!important;
 }
 .menu.menu-sidebar .nav.nav-default > li > ul > li > a {
-    padding-left: 55px;
-}
-.menu.menu-sidebar .nav.nav-default > li > ul > li > a {
-    padding-left: 52px;
+    padding-left: 57px;
 }
 .menu.menu-sidebar a {
     color: #666666;
 }
 
-.menu.menu-sidebar ul.nav-default > li > a:before,
+/** -start-  一级菜单有二级时，右边的小箭头  **/
 .menu.menu-sidebar ul.nav-default > li > a.menu:after {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -192,48 +178,55 @@
     -o-transform: scale(1);
     transform: scale(1);
 }
-/*.sub-menu .sub-menu > a:before,*/
-/*.sub-menu .sub-menu > a:after {*/
-    /*top: 5px;*/
-/*}*/
 .menu.menu-sidebar ul.nav-default > li.toggled > a.menu:after {
     content: "\f106";
 }
+/** -end-  一级菜单有二级时，右边的小箭头  **/
 
 
+.mini-menu .menu.menu-sidebar {width: 50px;}
 
-/*.mini-menu .menu.menu-sidebar li.nav-first-level > a > label.menu-title{display: none;}*/
-/*.mini-menu .menu.menu-sidebar ul.nav-second-level {position: absolute; left: 40px;}*/
-.mini-menu .menu.menu-sidebar{width: 50px;}
-.mini-menu .menu.menu-sidebar li a{
+/**  -start- 小菜单 修订**/
+.mini-menu .menu.menu-sidebar > ul.mini-bar > li > ul {
+    padding: 0px;
+}
+.mini-menu .menu.menu-sidebar > ul > li.active ul > li > a {
+    background-color: white;
+}
+.mini-menu .menu.menu-sidebar > ul > li.active ul > li > a.active {
+    background-color: #eeeeee;
+}
+.mini-menu .menu.menu-sidebar .dropdown-menu.nav li {
+    border: 0px;
+}
+.mini-menu .menu.menu-sidebar .dropdown-menu.nav li a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.mini-menu .menu.menu-sidebar ul.dropdown-menu {    /** 小菜单，二级菜单位置 **/
+    position: absolute; left: 50px;  top: -3px;
+}
+/**  -end- 小菜单 修订**/
+
+
+/* -- start -- 一级菜单*/
+.mini-menu .menu.menu-sidebar > ul.mini-bar > li a i{
     font-size: 16px; color: #666666;
 }
+/**     经过时         */
 .mini-menu .menu.menu-sidebar li:hover > a {
     color: #333333
 }
-.mini-menu .menu.menu-sidebar{}
-/*.mini-menu .nav-second-level  {display: none}*/
-/*.mini-menu .sub-menu > a:before,*/
-/*.mini-menu .sub-menu > a:after */
-/*{*/
-    /*display: none;*/
-/*}*/
-.mini-menu .sub-menu > a:after {
-    display: none;
+
+
+/*二级目录的处理*/
+.mini-menu .menu.menu-sidebar ul.dropdown-menu li a{
+    padding-left: 20px;
 }
-.mini-menu .menu-sidebar.menu > ul.nav li > ul > li:after {
-    display: none;
-}
-.mini-menu .menu-sidebar.menu > ul.nav > li:after {
-    display: none;
+.mini-menu .menu.menu-sidebar ul.dropdown-menu li > a.active,
+.mini-menu .menu.menu-sidebar ul.dropdown-menu li.open > a,
+.mini-menu .menu.menu-sidebar ul.dropdown-menu li:hover > a{
+    border-left: 4px solid #4099ff;
+    padding-left: 16px;
 }
 
-.mini-menu .menu.menu-sidebar .dropdown-menu{
-
-}
-/*.mini-menu .menu-sidebar.menu .nav-second-level li a {*/
-    /*padding-left: 15px;*/
-/*}*/
-/*.mini-menu .menu-sidebar.menu .nav-third-level li a {*/
-    /*padding-left: 12px;*/
-/*}*/
