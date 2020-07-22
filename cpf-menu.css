@@ -74,7 +74,7 @@
 }
 .menu-sidebar.menu label.menu-title{transition: display linear 2s; display: inline-block;}
 
-.menu > ul.nav li > a:before {
+.menu-sidebar.menu > ul.nav li > a:before {
     content: "";
     border-radius: 50%;
     position: absolute;
@@ -83,31 +83,31 @@
     width: 6px;
     height: 6px;
 }
-.menu > ul.nav > li > ul > li > a.active:before,
-.menu > ul.nav > li > ul > li:hover > a:before {
+.menu-sidebar.menu > ul.nav > li > ul > li > a.active:before,
+.menu-sidebar.menu > ul.nav > li > ul > li:hover > a:before {
     background: #30549c;
 }
-.menu .sub-menu ul {
+.menu-sidebar.menu .sub-menu ul {
     list-style: none;
     display: none;
     padding: 0;
 }
-.menu .sub-menu.toggled ul{
+.menu-sidebar.menu .sub-menu.toggled ul{
     display: block;
 }
-.menu > ul.nav > li > ul {
+.menu-sidebar.menu > ul.nav > li > ul {
     margin-bottom:15px;
 }
-.menu > ul.nav > li.toggled > a,
-.menu > ul.nav > li.dropdown > a:hover{
+.menu-sidebar.menu > ul.nav > li.toggled > a,
+.menu-sidebar.menu > ul.nav > li.dropdown > a:hover{
     border-left: 4px solid #4099ff;
     padding-left: 10px;
 }
-.menu > ul.nav li a:hover,
-.menu > ul.nav li a:focus {
+.menu-sidebar.menu > ul.nav li a:hover,
+.menu-sidebar.menu > ul.nav li a:focus {
     cursor: pointer;
 }
-.menu > ul.nav li > ul > li:after {
+.menu-sidebar.menu > ul.nav li > ul > li:after {
     content: "";
     position: absolute;
     top: 20px;
@@ -116,7 +116,7 @@
     height: 1px;
     background: rgba(200, 200, 200, 0.4);
 }
-.menu > ul.nav > li:after {
+.menu-sidebar.menu > ul.nav > li:after {
     content: "";
     position: absolute;
     top: 40px;
@@ -125,43 +125,43 @@
     height: calc(100% - 74px);
     background: rgba(200, 200, 200, 0.4);
 }
-.menu > ul.nav > li > ul  {position: relative}
+.menu-sidebar.menu > ul.nav > li > ul  {position: relative}
 
 
-.menu.navbar-collapse {
+.menu-sidebar.menu.navbar-collapse {
     padding-right: 0;
     padding-left: 0;
 }
-.menu ul li {
+.menu-sidebar.menu ul li {
     border-bottom: 1px solid #e7e7e7;
 }
 
-.menu ul li a.active {
+.menu-sidebar.menu ul li a.active {
     /*background-color: #eee;*/
 }
-/*.menu .arrow {*/
+/*.menu-sidebar.menu .arrow {*/
     /*float: right;*/
 /*}*/
-/*.menu .fa.arrow:before {*/
+/*.menu-sidebar.menu .fa.arrow:before {*/
     /*content: "\f104";*/
 /*}*/
-/*.menu .active>a>.fa.arrow:before {*/
+/*.menu-sidebar.menu .active>a>.fa.arrow:before {*/
     /*content: "\f107";*/
 /*}*/
-.menu .nav-second-level li,
-.menu .nav-third-level li {
+.menu-sidebar.menu .nav-second-level li,
+.menu-sidebar.menu .nav-third-level li {
     border-bottom: 0!important;
 }
-.menu .nav-second-level li a {
+.menu-sidebar.menu .nav-second-level li a {
     padding-left: 55px;
 }
-.menu .nav-third-level li a {
+.menu-sidebar.menu .nav-third-level li a {
     padding-left: 52px;
 }
-.menu a{
+.menu-sidebar.menu a{
     color: #666666;
 }
-.menu a i {
+.menu-sidebar.menu a i {
     margin-right: 5px;
 }
 
@@ -192,10 +192,11 @@
 
 
 
-.mini-menu .menu.menu-sidebar label.menu-title{display: none;}
+.mini-menu .menu.menu-sidebar li.nav-first-level > a > label.menu-title{display: none;}
+.mini-menu .menu.menu-sidebar ul.nav-second-level {position: absolute; left: 40px;}
 .mini-menu .menu.menu-sidebar{width: 50px;}
 .mini-menu .menu.menu-sidebar i{font-size: 16px; color: #a7b1c2}
-.mini-menu .menu.menu-sidebar ul li:hover i{color: #FFFAF7F7}
+.mini-menu .menu.menu-sidebar ul.nav li:hover i{color: #FFFAF7F7}
 .mini-menu .menu.menu-sidebar{}
 .mini-menu .nav-second-level  {display: none}
 .mini-menu .sub-menu > a:before,
@@ -204,4 +205,16 @@
 }
 .mini-menu .sub-menu > a:after {
     display: none;
+}
+.mini-menu .menu-sidebar.menu > ul.nav li > ul > li:after {
+    display: none;
+}
+.mini-menu .menu-sidebar.menu > ul.nav > li:after {
+    display: none;
+}
+.mini-menu .menu-sidebar.menu .nav-second-level li a {
+    padding-left: 15px;
+}
+.mini-menu .menu-sidebar.menu .nav-third-level li a {
+    padding-left: 12px;
 }

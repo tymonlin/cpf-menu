@@ -6,11 +6,12 @@
             scope: {
                 menuArray: "=",
                 translateKey: "@",
+                sidebarType: "@",
                 getUserInfo: "&"
             },
             template:
                 "<div>" +
-                "   <ul class=\"nav\">" +
+                "   <ul ng-show=\"sidebarType != 'miniBar'\" class=\"nav\">" +
                 "       <li class=\"dropdown\" data-ng-repeat=\"menu in menuArray\"" +
                 "           data-ng-class=\"{'active': (menu | CPFMenuActive), 'sub-menu': (menu.menuList != null && menu.menuList.length > 0), 'toggled': (menu | CPFMenuActive)}\">" +
                 "           <a data-ng-if=\"menu.menuList == null || menu.menuList.length == 0\"" +
@@ -24,6 +25,21 @@
                 "           <ul data-ng-if=\"menu.menuList != null && menu.menuList.length > 0\" class=\"nav nav-second-level\">" +
                 "               <li data-ng-repeat=\"sonMenu in menu.menuList\"> " +
                 "                   <a data-ui-sref=\"{{sonMenu.href}}\" data-ng-click=\"sidebarStat($event)\" ng-class=\"{'active': (sonMenu | CPFMenuActive)}\"> <label class='menu-title'>{{ translateKey ? (('menu.m_' + sonMenu[translateKey]) | CPFMenuTitle) : sonMenu.menuTitle}}</label> </a>" +
+                "               </li>"+
+                "           </ul>"+
+                "       </li>" +
+                "   </ul>" +
+                "   <ul ng-show=\"sidebarType == 'miniBar'\" class=\"nav\">" +
+                "       <li class=\"dropdown\" data-ng-repeat=\"menu in menuArray\" data-ng-class=\"{'active': (menu | CPFMenuActive)}\">" +
+                "           <a ng-class=\"{'active ': (menu | CPFMenuActive)}\" class='dropdown-toggle' " +
+                "               data-target=\"#\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"" +
+                "               data-ui-sref=\"{{menu.href}}\"><i class=\"fa {{menu.icon}}\"></i>" +
+                "           </a>" +
+                "           <ul class=\"dropdown-menu\" style='position: absolute; left: 55px;  top: 0px;'>" +
+                "               <li data-ng-repeat=\"sonMenu in menu.menuList\"> " +
+                "                   <a data-ui-sref=\"{{sonMenu.href}}\" data-ng-click=\"sidebarStat($event)\" ng-class=\"{'active': (sonMenu | CPFMenuActive)}\"> " +
+                "                       <label class='menu-title'>{{ translateKey ? (('menu.m_' + sonMenu[translateKey]) | CPFMenuTitle) : sonMenu.menuTitle}}</label>" +
+                "                   </a>" +
                 "               </li>"+
                 "           </ul>"+
                 "       </li>" +
