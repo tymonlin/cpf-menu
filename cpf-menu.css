@@ -57,7 +57,7 @@
 
 
 @media (min-width: 768px) {
-    .menu-sidebar.menu {
+    .menu.menu-sidebar {
         transition: width linear 0.1s;
         font-family: "Poppins", sans-serif;
         font-size: 14px;
@@ -83,26 +83,40 @@
     width: 6px;
     height: 6px;
 }
-.menu-sidebar.menu > ul.nav > li > ul > li > a.active:before,
-.menu-sidebar.menu > ul.nav > li > ul > li:hover > a:before {
-    background: #30549c;
+/*二级菜单前面的小点*/
+.menu-sidebar.menu > ul.nav-default > li > ul > li > a.active:before,
+.menu-sidebar.menu > ul.nav-default > li > ul > li:hover > a:before {
+    background: #4099ff;
 }
-.menu-sidebar.menu .sub-menu ul {
-    list-style: none;
-    display: none;
-    padding: 0;
-}
-.menu-sidebar.menu .sub-menu.toggled ul{
+
+/*.menu-sidebar.menu .sub-menu ul {*/
+    /*list-style: none;*/
+    /*display: none;*/
+    /*padding: 0;*/
+/*}*/
+.menu-sidebar.menu > ul.nav > .toggled ul{
     display: block;
 }
 .menu-sidebar.menu > ul.nav > li > ul {
     margin-bottom:15px;
 }
-.menu-sidebar.menu > ul.nav > li.toggled > a,
+/*一级菜单经过时左侧border的颜色*/
+
+.menu.menu-sidebar > ul.nav-default > li.toggled > a,
+.menu.menu-sidebar > ul.nav > li.active > a,
 .menu-sidebar.menu > ul.nav > li.dropdown > a:hover{
     border-left: 4px solid #4099ff;
-    padding-left: 10px;
+    padding-left: 11px;
 }
+/*二级目录的处理*/
+.menu.menu-sidebar ul.dropdown-menu li.active > a,
+.menu.menu-sidebar ul.dropdown-menu li.open > a,
+.menu.menu-sidebar ul.dropdown-menu li:hover > a{
+    border-left: 4px solid #4099ff;
+    padding-left: 16px;
+}
+
+
 .menu-sidebar.menu > ul.nav li a:hover,
 .menu-sidebar.menu > ul.nav li a:focus {
     cursor: pointer;
@@ -148,25 +162,22 @@
 /*.menu-sidebar.menu .active>a>.fa.arrow:before {*/
     /*content: "\f107";*/
 /*}*/
-.menu-sidebar.menu .nav-second-level li,
-.menu-sidebar.menu .nav-third-level li {
+.menu.menu-sidebar .nav.nav-default li,
+.menu.menu-sidebar .nav-third-level li {
     border-bottom: 0!important;
 }
-.menu-sidebar.menu .nav-second-level li a {
+.menu.menu-sidebar .nav.nav-default > li > ul > li > a {
     padding-left: 55px;
 }
-.menu-sidebar.menu .nav-third-level li a {
+.menu.menu-sidebar .nav.nav-default > li > ul > li > a {
     padding-left: 52px;
 }
-.menu-sidebar.menu a{
+.menu.menu-sidebar a {
     color: #666666;
 }
-.menu-sidebar.menu a i {
-    margin-right: 5px;
-}
 
-.sub-menu > a:before,
-.sub-menu > a:after {
+.menu.menu-sidebar ul.nav-default > li > a:before,
+.menu.menu-sidebar ul.nav-default > li > a.menu:after {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
@@ -174,35 +185,39 @@
     -webkit-font-smoothing: antialiased;
     float: right !important;
 }
-.sub-menu > a:after {
+.menu.menu-sidebar ul.nav-default > li > a.menu:after {
     content: "\f105";
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     -o-transform: scale(1);
     transform: scale(1);
 }
-.sub-menu .sub-menu > a:before,
-.sub-menu .sub-menu > a:after {
-    top: 5px;
-}
-
-.sub-menu.toggled .sub-menu:after {
+/*.sub-menu .sub-menu > a:before,*/
+/*.sub-menu .sub-menu > a:after {*/
+    /*top: 5px;*/
+/*}*/
+.menu.menu-sidebar ul.nav-default > li.toggled > a.menu:after {
     content: "\f106";
 }
 
 
 
-.mini-menu .menu.menu-sidebar li.nav-first-level > a > label.menu-title{display: none;}
-.mini-menu .menu.menu-sidebar ul.nav-second-level {position: absolute; left: 40px;}
+/*.mini-menu .menu.menu-sidebar li.nav-first-level > a > label.menu-title{display: none;}*/
+/*.mini-menu .menu.menu-sidebar ul.nav-second-level {position: absolute; left: 40px;}*/
 .mini-menu .menu.menu-sidebar{width: 50px;}
-.mini-menu .menu.menu-sidebar i{font-size: 16px; color: #a7b1c2}
-.mini-menu .menu.menu-sidebar ul.nav li:hover i{color: #FFFAF7F7}
-.mini-menu .menu.menu-sidebar{}
-.mini-menu .nav-second-level  {display: none}
-.mini-menu .sub-menu > a:before,
-.mini-menu .sub-menu > a:after {
-    display: none;
+.mini-menu .menu.menu-sidebar li a{
+    font-size: 16px; color: #666666;
 }
+.mini-menu .menu.menu-sidebar li:hover > a {
+    color: #333333
+}
+.mini-menu .menu.menu-sidebar{}
+/*.mini-menu .nav-second-level  {display: none}*/
+/*.mini-menu .sub-menu > a:before,*/
+/*.mini-menu .sub-menu > a:after */
+/*{*/
+    /*display: none;*/
+/*}*/
 .mini-menu .sub-menu > a:after {
     display: none;
 }
@@ -212,9 +227,13 @@
 .mini-menu .menu-sidebar.menu > ul.nav > li:after {
     display: none;
 }
-.mini-menu .menu-sidebar.menu .nav-second-level li a {
-    padding-left: 15px;
+
+.mini-menu .menu.menu-sidebar .dropdown-menu{
+
 }
-.mini-menu .menu-sidebar.menu .nav-third-level li a {
-    padding-left: 12px;
-}
+/*.mini-menu .menu-sidebar.menu .nav-second-level li a {*/
+    /*padding-left: 15px;*/
+/*}*/
+/*.mini-menu .menu-sidebar.menu .nav-third-level li a {*/
+    /*padding-left: 12px;*/
+/*}*/

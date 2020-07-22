@@ -11,31 +11,34 @@
             },
             template:
                 "<div>" +
-                "   <ul ng-show=\"sidebarType != 'miniBar'\" class=\"nav\">" +
+                "   <ul ng-show=\"sidebarType != 'miniBar'\" class=\"nav nav-default\">" +
                 "       <li class=\"dropdown\" data-ng-repeat=\"menu in menuArray\"" +
-                "           data-ng-class=\"{'active': (menu | CPFMenuActive), 'sub-menu': (menu.menuList != null && menu.menuList.length > 0), 'toggled': (menu | CPFMenuActive)}\">" +
-                "           <a data-ng-if=\"menu.menuList == null || menu.menuList.length == 0\"" +
-                "               ng-class=\"{'active ': (menu | CPFMenuActive), 'sub-menu': (menu.menuList != null && menu.menuList.length > 0) }\"" +
+                "           data-ng-class=\"{'active': (menu | CPFMenuActive), 'toggled': (menu | CPFMenuActive)}\">" +
+                "           <a data-ng-if=\"!menu.menuList\"" +
+                "               ng-class=\"{'active ': (menu | CPFMenuActive)}\"" +
                 "               data-ui-sref=\"{{menu.href}}\"><i class=\"fa {{menu.icon}}\"></i> <label class='menu-title'>{{translateKey ? (('menu.m_' + menu[translateKey]) | CPFMenuTitle) : menu.menuTitle}}</label> " +
                 "           </a>" +
-                "           <a data-ng-if=\"menu.menuList != null && menu.menuList.length > 0\" "+
-                "               ng-class=\"{'active':(menu | CPFMenuActive), 'sub-menu':(menu.menuList != null && menu.menuList.length > 0)}\" toggle-submenu>" +
+                "           <a data-ng-if=\"menu.menuList\" "+
+                "               ng-class=\"{'active':(menu | CPFMenuActive)}\" toggle-submenu>" +
                 "               <i class=\"fa {{menu.icon}}\"></i> <label class='menu-title'>{{translateKey ? (('menu.m_' + menu[translateKey]) | CPFMenuTitle) : menu.menuTitle}}</label>" +
                 "           </a>"+
-                "           <ul data-ng-if=\"menu.menuList != null && menu.menuList.length > 0\" class=\"nav nav-second-level\">" +
+                "           <ul data-ng-if=\"menu.menuList != null && menu.menuList.length > 0\" class=\"nav\">" +
                 "               <li data-ng-repeat=\"sonMenu in menu.menuList\"> " +
                 "                   <a data-ui-sref=\"{{sonMenu.href}}\" data-ng-click=\"sidebarStat($event)\" ng-class=\"{'active': (sonMenu | CPFMenuActive)}\"> <label class='menu-title'>{{ translateKey ? (('menu.m_' + sonMenu[translateKey]) | CPFMenuTitle) : sonMenu.menuTitle}}</label> </a>" +
                 "               </li>"+
                 "           </ul>"+
                 "       </li>" +
                 "   </ul>" +
-                "   <ul ng-show=\"sidebarType == 'miniBar'\" class=\"nav\">" +
-                "       <li class=\"dropdown\" data-ng-repeat=\"menu in menuArray\" data-ng-class=\"{'active': (menu | CPFMenuActive)}\">" +
-                "           <a ng-class=\"{'active ': (menu | CPFMenuActive)}\" class='dropdown-toggle' " +
-                "               data-target=\"#\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"" +
-                "               data-ui-sref=\"{{menu.href}}\"><i class=\"fa {{menu.icon}}\"></i>" +
+                "   <ul ng-show=\"sidebarType == 'miniBar'\" class=\"nav mini-bar\">" +
+                "       <li data-ng-repeat=\"menu in menuArray\" data-ng-class=\"{'active': (menu | CPFMenuActive)}\">" +
+                "           <a data-ng-if=\"!menu.menuList\" ng-class=\"{'active ': (menu | CPFMenuActive)}\" data-ui-sref=\"{{menu.href}}\">" +
+                "               <i class=\"fa {{menu.icon}}\"></i>" +
                 "           </a>" +
-                "           <ul class=\"dropdown-menu\" style='position: absolute; left: 55px;  top: 0px;'>" +
+                "           <a data-ng-if=\"menu.menuList\" ng-class=\"{'active ': (menu | CPFMenuActive)}\" " +
+                "               data-target=\"#\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" dropdown-toggle>" +
+                "               <i class=\"fa {{menu.icon}}\"></i>" +
+                "           </a>" +
+                "           <ul class=\"dropdown-menu\" style='position: absolute; left: 50px;  top: 0px;'>" +
                 "               <li data-ng-repeat=\"sonMenu in menu.menuList\"> " +
                 "                   <a data-ui-sref=\"{{sonMenu.href}}\" data-ng-click=\"sidebarStat($event)\" ng-class=\"{'active': (sonMenu | CPFMenuActive)}\"> " +
                 "                       <label class='menu-title'>{{ translateKey ? (('menu.m_' + sonMenu[translateKey]) | CPFMenuTitle) : sonMenu.menuTitle}}</label>" +
@@ -112,8 +115,8 @@
         return {
             restrict: 'A',
             link: function(scope, element) {
+                $(element).addClass("menu");
                 element.click(function(){
-                    if ($(".mini-menu").size() > 0) return;
                     var flag = element.parent().hasClass("toggled");
                     element.parent().parent().children().each(function (i) {
                         $(this).removeClass("toggled");
@@ -124,6 +127,15 @@
                         element.parent().toggleClass('toggled');
                     }
                 });
+            }
+        }
+    });
+    menu.directive('dropdownToggle', function(){
+        return {
+            restrict: 'A',
+            link: function(scope, element) {
+                $(element).addClass("dropdown-toggle");
+                $(element).dropdown();
             }
         }
     });
