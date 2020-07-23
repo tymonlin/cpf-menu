@@ -106,11 +106,12 @@
 
 
 /*二级目录的处理*/
-.style-dark .menu.menu-sidebar > ul > li:hover a,
-.style-dark .menu.menu-sidebar > ul > li.active a,
-.style-dark .menu.menu-sidebar ul.dropdown-menu li:hover > a,
+.style-dark .menu.menu-sidebar > ul > li:hover > a,
+.style-dark .menu.menu-sidebar > ul > li.active > a,
+.style-dark .menu.menu-sidebar ul.dropdown-menu li > a:hover,
 .style-dark .menu.menu-sidebar ul.dropdown-menu li > a.active {
     border-left: 4px solid #19aa8d;
     background-color: #293846;
+    padding-left: 11px;
 }
 

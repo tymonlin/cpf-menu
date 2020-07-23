@@ -11,18 +11,16 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link href="bower_components/bootstrap/dist/js/bootstrap.min.js" />
     <script src="bower_components/bootstrap-dropdown/index.js"></script>
-
     <script src="cpf-menu.js?v=17"></script>
 
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <link href="cpf-menu.css?v=17" rel="stylesheet" type="text/css"/>
-    <link href="cpf-menu-dark.css?v=12" rel="stylesheet" type="text/css"/>
+    <link href="cpf-menu-dark.css?v=13" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div ng-controller="CPFMenuDemoCtrl" class="style-dark" ng-class="{'mini-menu': sidebarType == 'miniBar'}">
+<div ng-controller="CPFMenuDemoCtrl" class="style-purple" ng-class="{'mini-menu': sidebarType == 'miniBar'}">
     <button ng-click="switchSiderbar()">菜单</button>
     <div class="head">
         <cpf-area-menu class="big-menu pull-left" menu-area-array="menuAreaArray" get-user-info="getUserInfo(listener)"></cpf-area-menu>
