@@ -12,19 +12,58 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/bootstrap-dropdown/index.js"></script>
-    <script src="cpf-menu.js?v=17"></script>
+    <script src="cpf-menu.js?v=18"></script>
 
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <link href="cpf-menu.css?v=17" rel="stylesheet" type="text/css"/>
     <link href="cpf-menu-dark.css?v=13" rel="stylesheet" type="text/css"/>
 </head>
-<body>
-<div ng-controller="CPFMenuDemoCtrl" class="style-purple" ng-class="{'mini-menu': sidebarType == 'miniBar'}">
-    <button ng-click="switchSiderbar()">菜单</button>
-    <div class="head">
-        <cpf-area-menu class="big-menu pull-left" menu-area-array="menuAreaArray" get-user-info="getUserInfo(listener)"></cpf-area-menu>
+<body class="style-dark" ng-controller="CPFMenuDemoCtrl">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header" style="min-width: 165px;">
+            <a class="navbar-brand" href="#">Cloud Pay Full</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="" ng-click="switchSiderbar()"><i class="fa fa-align-justify"></i></a> </li>
+            </ul>
+            <!--<p class="navbar-text navbar-left">向左对齐-文本</p>-->
+            <cpf-area-menu menu-area-array="menuAreaArray" get-user-info="getUserInfo(listener)"></cpf-area-menu>
+
+            <!--向右对齐-->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <b class="glyphicon glyphicon-user"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href=""><i class="fa fa-user fa-fw"></i> {{userInfo.userName}}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="" ng-click="toChangePwd()"><i class="fa fa-gear fa-fw"></i> 密码修改</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:;" data-ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Language <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="" ng-click="changeLanguage('zh-cn')">简体中文 <i class="fa fa-language fa-fw" ng-show="globalLanguage=='zh-cn'"></i></a></li>
+                        <li><a href="javascript:;" ng-click="changeLanguage('en')">English <i class="fa fa-language fa-fw" ng-show="globalLanguage=='en'"></i></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
+<div ng-class="{'mini-menu': sidebarType == 'miniBar'}">
+
     <cpf-menu menu-array="menuArray" sidebar-type="{{sidebarType}}" class="collapse navbar-collapse menu menu-sidebar" role="navigation"></cpf-menu>
 
 </div>

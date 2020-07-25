@@ -78,7 +78,7 @@
                 getUserInfo: "&"
             },
             template:
-                "<ul class=\"pull-left\">" +
+                "<ul class=\"nav navbar-nav navbar-left\">" +
                 "   <li ng-class=\"{true: 'selected2', false: ''}[activeAreaMenuId == menu.menuId]\" ng-repeat=\"menu in menuAreaArray\">" +
                 "       <a href='' ng-click='changeMenu(menu)'>{{translateKey ? ('menu.m_' + menu[translateKey] | CPFMenuTitle) : menu.menuTitle}}</a>" +
                 "   </li>" +
