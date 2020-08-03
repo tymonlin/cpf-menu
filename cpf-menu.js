@@ -49,25 +49,8 @@
                 "   </ul>" +
                 "</div>",
             replace: true,
-            controller: ["$scope", "$rootScope", "$cookies", "$CPFMenu",
-                function ($scope, $rootScope, $cookies, $CPFMenu) {
-                    if (!$CPFMenu.menuAreaArrayFlag) {
-                        var cookiesUserInfo = $cookies.getObject($CPFMenu.userInfoKey);
-                        if (cookiesUserInfo) {
-                            var listener = {
-                                success: function (userInfo) {
-                                    if (userInfo.platformInfoList.length < 1) return;
-                                    var menuList = $CPFMenu.getMenuList(userInfo, userInfo.platformInfoList[0].platCode);
-                                    var menuAreaArray = $CPFMenu.initMenuList(menuList, 0);
-                                    var defaultMenu = $CPFMenu.getDefaultMenu(menuAreaArray, $cookies.getObject("menuInfo"));
-                                    $rootScope.menuArray = defaultMenu.menuList;
-                                }
-                            };
-                            $scope.getUserInfo({"listener": listener});
-                        }
-                    }
-                }]
-        }
+            controller: [function () {}]
+        };
     });
     menu.directive("cpfAreaMenu", function () {
         return {
@@ -79,8 +62,8 @@
             },
             template:
                 "<ul class=\"nav navbar-nav navbar-left\">" +
-                "   <li ng-class=\"{true: 'selected2', false: ''}[activeAreaMenuId == menu.menuId]\" ng-repeat=\"menu in menuAreaArray\">" +
-                "       <a href='' ng-click='changeMenu(menu)'>{{translateKey ? ('menu.m_' + menu[translateKey] | CPFMenuTitle) : menu.menuTitle}}</a>" +
+                "   <li ng-class=\"{true: \"selected2\", false: \"\"}[activeAreaMenuId == menu.menuId]\" ng-repeat=\"menu in menuAreaArray\">" +
+                "       <a href=\"\" ng-click=\"changeMenu(menu)\">{{translateKey ? (\"menu.m_\" + menu[translateKey] | CPFMenuTitle) : menu.menuTitle}}</a>" +
                 "   </li>" +
                 "</ul>",
             replace: true,
@@ -91,53 +74,38 @@
                         $scope.activeAreaMenuId = menu.menuId;
                         var expireDate = new Date();
                         expireDate.setDate(expireDate.getDate() + $CPFMenu.cookiesDays);//设置cookie保存30天
-                        $cookies.putObject("menuInfo", {"bigMenuId": menu.menuId}, {'expires': expireDate});
+                        $cookies.putObject("menuInfo", {"bigMenuId": menu.menuId}, {"expires": expireDate});
                     };
-                    if ($CPFMenu.menuAreaArrayFlag) {
-                        var userCookies = $cookies.getObject($CPFMenu.userInfoKey);
-                        if (userCookies) {
-                            var listener = {
-                                success: function (userInfo) {
-                                    if (userInfo.platformInfoList.length < 1) return;
-                                    var menuList = $CPFMenu.getMenuList(userInfo, userInfo.platformInfoList[0].platCode);
-                                    $rootScope.menuAreaArray = $CPFMenu.initMenuList(menuList, 0);
-                                    var defaultMenu = $CPFMenu.getDefaultMenu($rootScope.menuAreaArray, $cookies.getObject("menuInfo"));
-                                    $scope.changeMenu(defaultMenu);
-                                }
-                            };
-                            $scope.getUserInfo({"listener": listener});
-                        }
-                    }
                 }]
-        }
+        };
     });
-    menu.directive('toggleSubmenu', function(){
+    menu.directive("toggleSubmenu", function(){
         return {
-            restrict: 'A',
+            restrict: "A",
             link: function(scope, element) {
                 $(element).addClass("menu");
                 element.click(function(){
                     var flag = element.parent().hasClass("toggled");
-                    element.parent().parent().children().each(function (i) {
+                    element.parent().parent().children().each(function () {
                         $(this).removeClass("toggled");
                         $(this).children("ul").css("display", "none");
                     });
                     if (!flag) {
                         element.next().slideToggle(200);
-                        element.parent().toggleClass('toggled');
+                        element.parent().toggleClass("toggled");
                     }
                 });
             }
-        }
+        };
     });
-    menu.directive('dropdownToggle', function(){
+    menu.directive("dropdownToggle", function(){
         return {
-            restrict: 'A',
+            restrict: "A",
             link: function(scope, element) {
                 $(element).addClass("dropdown-toggle");
                 $(element).dropdown();
             }
-        }
+        };
     });
     menu.provider("$CPFMenu", [function CPFMenuProvider() {
         this.menuAreaArrayFlag = true;
@@ -145,41 +113,55 @@
         this.cookiesDays = 30;
         this.setConfig = function (config) {
             angular.extend(this, config);
-        }
-        this.getMenuList = function(userInfo, platCode) {
-            for (var i = 0; i < userInfo.platformInfoList.length; i++) {
-                var platformInfo = userInfo.platformInfoList[i];
-                if (platformInfo.platCode == platCode) {
-                    return platformInfo.menuList;
-                }
+        };
+        this.initMenu = function (rootScope, platformInfoList, defaultPlatCode, cacheMenuInfo) {
+            // 获取是否进行了平台选择，如果有，则默认先进入此平台。
+            var menuList = [], tempMenuTree = [];
+            if (defaultPlatCode) {
+                menuList = this.getPlatformMenuList(platformInfoList, defaultPlatCode);
+            }
+            if (menuList.length > 0) {
+                tempMenuTree = this.buildMenuTree(menuList, 0);
+            }
+            // 判断是否有顶部的权限列表
+            if (this.menuAreaArrayFlag) { // 有顶部列表，则先获取顶部列表对象
+                rootScope.menuAreaArray = tempMenuTree;
+                rootScope.menuArray = this.getDefaultMenu(rootScope.menuAreaArray, cacheMenuInfo);
+            } else {
+                rootScope.menuArray = tempMenuTree;
+            }
+        };
+        this.getPlatformMenuList = function(platformInfoList, platCode) {
+            for (var i = 0; i < platformInfoList.length; i++) {
+                if (platformInfoList[i].platCode == platCode) { return platformInfoList[i].menuList; }
             }
             return [];
         };
-        this.initMenuList = function(menuList, parentMenuId) {
+        this.buildMenuTree = function(menuList, parentMenuId) {
             var retList = [];
-            if (menuList == undefined || menuList.length < 1) return retList;
+            if (menuList == undefined || menuList.length < 1) {return retList;}
             for (var i = 0; i < menuList.length; i ++) {
                 var menu = menuList[i];
                 if (menu.parentMenuId == parentMenuId) {
-                    menu.menuList = this.initMenuList(menuList, menu.menuId);
+                    menu.menuList = this.buildMenuTree(menuList, menu.menuId);
                     retList.push(menu);
                 }
             }
             return retList.length < 1 ? undefined : retList;
         };
         this.getDefaultMenu = function(menuAreaArray, cacheMenuInfo) {
-            if (!menuAreaArray) return ;
-            if (cacheMenuInfo == undefined || cacheMenuInfo.bigMenuId == undefined) {
-                cacheMenuInfo = {bigMenuId: menuAreaArray[0].menuId}
+            if (!menuAreaArray) {return;}
+            if (!cacheMenuInfo || cacheMenuInfo.bigMenuId == undefined) {
+                cacheMenuInfo = {bigMenuId: menuAreaArray[0].menuId};
             }
-            var menu = undefined;
+            var menuList = [];
             for (var i = 0; i < menuAreaArray.length; i++) {
                 if (menuAreaArray[i].menuId == cacheMenuInfo.bigMenuId) {
-                    menu = menuAreaArray[i];
+                    menuList = menuAreaArray[i];
                     break;
                 }
             }
-            return menu;
+            return menuList;
         };
         this.$get = function () {
             return this;
@@ -193,12 +175,12 @@
         fun.$stateful = true;
         return fun;
     }]);
-    menu.filter('CPFMenuActive',['$state',function($state){
+    menu.filter("CPFMenuActive",["$state",function($state){
         var fun = function(menu){
-            if (menu.href != '' && $state.includes(menu.href)) return true;
-            if (menu.showFlag != undefined && menu.showFlag.length > 1 && $state.current.name.indexOf(menu.showFlag) >= 0) return true;
+            if (menu.href != "" && $state.includes(menu.href)) {return true;}
+            if (menu.showFlag != undefined && menu.showFlag.length > 1 && $state.current.name.indexOf(menu.showFlag) >= 0) {return true;}
             return false;
-        }
+        };
         fun.$stateful = true;
         return fun;
     }]);
