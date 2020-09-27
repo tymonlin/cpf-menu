@@ -34,8 +34,8 @@
                 "           <a data-ng-if=\"!menu.menuList\" ng-class=\"{'active ': (menu | CPFMenuActive)}\" data-ui-sref=\"{{menu.href}}\">" +
                 "               <i class=\"fa {{menu.icon}}\"></i>" +
                 "           </a>" +
-                "           <a data-ng-if=\"menu.menuList\" ng-class=\"{'active ': (menu | CPFMenuActive)}\" " +
-                "               data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" dropdown-toggle>" +
+                "           <a data-ng-if=\"menu.menuList\" class=\"dropdown-toggle\" ng-class=\"{'active ': (menu | CPFMenuActive)}\" " +
+                "               data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
                 "               <i class=\"fa {{menu.icon}}\"></i>" +
                 "           </a>" +
                 "           <ul class=\"dropdown-menu nav\">" +
@@ -98,15 +98,15 @@
             }
         };
     });
-    menu.directive("dropdownToggle", function(){
-        return {
-            restrict: "A",
-            link: function(scope, element) {
-                $(element).addClass("dropdown-toggle");
-                $(element).dropdown();
-            }
-        };
-    });
+    // menu.directive("dropdownToggle", function(){
+    //     return {
+    //         restrict: "A",
+    //         link: function(scope, element) {
+    //             $(element).addClass("dropdown-toggle");
+    //             $(element).dropdown();
+    //         }
+    //     };
+    // });
     menu.provider("$CPFMenu", [function CPFMenuProvider() {
         this.menuAreaArrayFlag = true;
         this.userInfoKey = "userInfo";
