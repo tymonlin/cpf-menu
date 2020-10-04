@@ -178,7 +178,7 @@
     menu.filter("CPFMenuActive",["$state",function($state){
         var fun = function(menu){
             if (menu.href != "" && $state.includes(menu.href)) {return true;}
-            if (menu.showFlag != undefined && menu.showFlag.length > 1 && $state.current.name.indexOf(menu.showFlag) >= 0) {return true;}
+            if (menu.showFlag != undefined && menu.showFlag.length > 1 && $state.current.name.indexOf(menu.showFlag) == 0) {return true;}
             return false;
         };
         fun.$stateful = true;
