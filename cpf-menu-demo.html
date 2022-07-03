@@ -74,8 +74,11 @@
     }]);
     app.controller('CPFMenuDemoCtrl', function($scope, $rootScope, $cookies, TestUserDataResource, $CPFMenu) {
         TestUserDataResource.login({}, function (userInfo) {
-            var menuList = $CPFMenu.getMenuList(userInfo, "CRM");
-            $rootScope.menuAreaArray = $CPFMenu.initMenuList(menuList, 0);
+            console.log(userInfo);
+            var menuList = $CPFMenu.getPlatformMenuList(userInfo.platformInfoList, "CRM");
+            console.log(menuList);
+            $rootScope.menuAreaArray = $CPFMenu.buildMenuTree(menuList, 0);
+            console.log("menuAreaArray:{}", $rootScope.menuAreaArray);
             $rootScope.menuArray = $rootScope.menuAreaArray[0].menuList;
         }, function (error) {
             alert(error.message);
