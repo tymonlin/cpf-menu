@@ -1,6 +1,6 @@
 {
   "name": "cpf-menu",
-  "version": "2.0.4",
+  "version": "2.0.5-beta",
   "description": "sidebar-menu",
   "main": "index.js",
   "scripts": {

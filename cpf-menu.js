@@ -157,7 +157,7 @@
             var menuList = [];
             for (var i = 0; i < menuAreaArray.length; i++) {
                 if (menuAreaArray[i].menuId == cacheMenuInfo.bigMenuId) {
-                    menuList = menuAreaArray[i];
+                    menuList = menuAreaArray[i].menuList;
                     break;
                 }
             }
