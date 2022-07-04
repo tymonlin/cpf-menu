@@ -7,7 +7,8 @@
                 menuArray: "=",
                 translateKey: "@",
                 sidebarType: "@",
-                getUserInfo: "&"
+                getUserInfo: "&",
+                logout: "&"
             },
             template:
                 "<div>" +
@@ -49,7 +50,17 @@
                 "   </ul>" +
                 "</div>",
             replace: true,
-            controller: [function () {}]
+            controller: ["$scope", "$rootScope", "$cookies", "$CPFMenu",
+                function ($scope, $rootScope, $cookies, $CPFMenu) {
+                    var cookiesUserInfo = $cookies.getObject($CPFMenu.userInfoKey);
+                    if (cookiesUserInfo) {
+                        $scope.getUserInfo();
+                    } else {
+                        if ($scope.logout) {
+                            $scope.logout();
+                        }
+                    }
+                }]
         };
     });
     menu.directive("cpfAreaMenu", function () {
@@ -62,7 +73,7 @@
             },
             template:
                 "<ul class=\"nav navbar-nav navbar-left\">" +
-                "   <li ng-class=\"{true: \"selected2\", false: \"\"}[activeAreaMenuId == menu.menuId]\" ng-repeat=\"menu in menuAreaArray\">" +
+                "   <li ng-class=\"{true: 'selected2', false: ''}[activeAreaMenuId == menu.menuId]\" ng-repeat=\"menu in menuAreaArray\">" +
                 "       <a href=\"\" ng-click=\"changeMenu(menu)\">{{translateKey ? (\"menu.m_\" + menu[translateKey] | CPFMenuTitle) : menu.menuTitle}}</a>" +
                 "   </li>" +
                 "</ul>",
